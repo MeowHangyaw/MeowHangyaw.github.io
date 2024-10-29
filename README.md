@@ -1,1 +1,0 @@
-# yishaq.github.io
