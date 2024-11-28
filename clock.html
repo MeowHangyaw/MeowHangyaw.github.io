@@ -5,57 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Timer</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <script>
+        // Function to initialize a countdown
+        function startCountdown(targetDate, elementId) {
+            const countdownElement = document.getElementById(elementId);
+            const targetTime = new Date(targetDate).getTime();
+
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = targetTime - now;
+
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    countdownElement.innerHTML = "Countdown Ended";
+                    return;
+                }
+
+                // Calculate days, hours, minutes, and seconds
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                // Update the countdown element
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+
+        // Initialize multiple countdowns after the DOM loads
+        window.onload = () => {
+            startCountdown("Feb 21, 2025 12:00:00", "จากเหย้า"); // Event 1
+            startCountdown("Dec 14, 2024 09:00:00", "tpat1"); // Event 2
+            startCountdown("Dec 8, 2024 09:00:00", "tpat3"); // Event 3
+            startCountdown("Dec 31, 2024 23:59:59", "newyear"); // Event 4
+            startCountdown("Mar 8, 2025 09:00:00", "alevel"); // Event 5
+        };
+    </script>
     <style>
-        #countdown {
-         font-size: 3rem;
-         color: black;
-         font-weight: bold;
+        .countdown {
+            background: #333;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            text-align: center;
+            width: 250px;
         }
     </style>
 </head>
-<header>
-    <h1>Clock - Countdown</h1>
+<body>
+    <header>
+    <h1>Hangyaw's Countdown Clock</h1>
     <h3> for SK 143 - King Rose</h3>
+    <h2>เคาวท์ดาวน์สำหรับส.ก. ๑๔๓ กุหลาบราชันย์</h2>
     <nav>
         <a href="#จากเหย้า"> จากเหย้า </a>
         <a href="#tpat1"> TPAT1 </a>
         <a href="#tpat3"> TGAT and TPAT3 </a>
+        <a href="#newyear"> ปีใหม่ </a>
         <a href="#alevel"> A-Level</a>
     </nav>
-</header>
-<body>
-    <article id="จากเหย้า">
-        <h2> จากเหย้า 143</h2>
-    <div id="countdown">Loading...</div>
-
-    <script>
-        // Set the date to count down to
-const countdownDate = new Date("Feb 14, 2025 12:00:00").getTime();
-
-// Update the countdown every second
-const timer = setInterval(function () {
-    const now = new Date().getTime();
-    const timeLeft = countdownDate - now;
-
-    // Calculate days, hours, minutes, and seconds
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    // Display the result
-    document.getElementById("countdown").innerHTML = `
-        ${days}d ${hours}h ${minutes}m ${seconds}s
-    `;
-
-    // Stop the timer when the countdown is over
-    if (timeLeft < 0) {
-        clearInterval(timer);
-        document.getElementById("countdown").innerHTML = "Countdown Ended";
-    }
-}, 1000);
-    </script>
+    </header>
+    <main>
+    <article>
+        <div id="จากเหย้า" class="countdown">
+        <h3>จากเหย้า sk143</h3>
+        <p id="จากเหย้า">Loading...</p>
+        </div>
+        <div id="tpat1" class="countdown">
+        <h3>TPAT1 กสพท.</h3>
+        <p id="tpat1">Loading...</p>
+        </div>
+        <div id="tpat3" class="countdown">
+        <h3>TGaT & TPAT3</h3>
+        <p id="tpat3">Loading...</p>
+        </div>
+        <div id="newyear" class="countdown">
+        <h3>วันปีใหม่</h3>
+        <p id="newyear">Loading...</p>
+        </div>
+        <div id="alevel" class="countdown">
+        <h3>A-levels</h3>
+        <p id="alevel">Loading...</p>
+        </div>
     </article>
+    </main>
     <footer>
             <p>Have any problems? Contact Us!</p>
             <p>Email: <a href="mailto:hangyaw.meow@gmail.com">hangyaw.meow@gmail.com</a></p>
