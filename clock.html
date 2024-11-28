@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+        #countdown {
+         font-size: 3rem;
+         color: #4CAF50;  
+         font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown">Loading...</div>
+
+    <script>
+        // Set the date to count down to
+const countdownDate = new Date("Feb 14, 2024 12:00:00").getTime();
+
+// Update the countdown every second
+const timer = setInterval(function () {
+    const now = new Date().getTime();
+    const timeLeft = countdownDate - now;
+
+    // Calculate days, hours, minutes, and seconds
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    // Display the result
+    document.getElementById("countdown").innerHTML = `
+        ${days}d ${hours}h ${minutes}m ${seconds}s
+    `;
+
+    // Stop the timer when the countdown is over
+    if (timeLeft < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "Countdown Ended";
+    }
+}, 1000);
+
+    </script>
+</body>
+</html>
